@@ -28,6 +28,12 @@ namespace RestCustomerService.Controllers
             return CList.FirstOrDefault(customer => customer.Id == id);
         }
 
+        [Route("{customerId}/orders")]
+        public IEnumerable<Order> GetByCustomerId(int customerId)
+        {
+            return OrdersController.OList.FindAll(order => order.CustomerId == customerId);
+        }
+
         // POST: api/Customers
         [HttpPost]
         public Customer Post([FromBody] Customer value)
