@@ -9,6 +9,8 @@ namespace RestCustomerService.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
+        private static int NextId = 2;
+
         internal static readonly List<Order> OList = new List<Order>
         {
             new Order {Id = 1, CustomerId = 1, Item = "Book", Price = 12.45},
@@ -39,7 +41,7 @@ namespace RestCustomerService.Controllers
         [HttpPost]
         public Order Post([FromBody] Order value)
         {
-            value.Id = Order.NextId++;
+            value.Id = NextId++;
             OList.Add(value);
             return value;
         }

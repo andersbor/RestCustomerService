@@ -9,6 +9,8 @@ namespace RestCustomerService.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
+        private static int NextId = 2;
+
         private static readonly List<Customer> CList = new List<Customer>
         {
             new Customer {Id = 1, FirstName = "Anders", LastName = "B", Year = 2000}
@@ -22,7 +24,7 @@ namespace RestCustomerService.Controllers
         }
 
         // GET: api/Customers/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id:int}", Name = "Get")]
         public Customer Get(int id)
         {
             return CList.FirstOrDefault(customer => customer.Id == id);
@@ -38,7 +40,7 @@ namespace RestCustomerService.Controllers
         [HttpPost]
         public Customer Post([FromBody] Customer value)
         {
-            value.Id = Customer.NextId++; ;
+            value.Id = NextId++; ;
             CList.Add(value);
             return value;
         }
